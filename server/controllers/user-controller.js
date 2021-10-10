@@ -10,23 +10,34 @@ class UserController {
 
       return res.json(userData);
     } catch (error) {
-      console.log(error);
+      next(error);
     }
   }
 
   async login(req, res, next) {
     try {
-    } catch (error) {}
+    } catch (error) {
+      next(error);
+    }
   }
 
   async logout(req, res, next) {
     try {
-    } catch (error) {}
+    } catch (error) {
+      next(error);
+    }
   }
 
   async activate(req, res, next) {
     try {
-    } catch (error) {}
+      const activationLink = req.params.link;
+
+      await userService.activate(activationLink);
+
+      return res.redirect(process.env.CLIENT_URL);
+    } catch (error) {
+      next(error);
+    }
   }
 
   async refresh(req, res, next) {
@@ -37,7 +48,9 @@ class UserController {
   async getUsers(req, res, next) {
     try {
       res.json({ message: 'Робит' });
-    } catch (error) {}
+    } catch (error) {
+      next(error);
+    }
   }
 }
 

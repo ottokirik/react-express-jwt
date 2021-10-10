@@ -8,6 +8,8 @@ const mongoose = require('mongoose');
 
 const router = require('./router');
 
+const errorMiddleware = require('./middlewares/error-middleware');
+
 const app = express();
 
 app.use(express.json());
@@ -15,6 +17,9 @@ app.use(cookieParser());
 app.use(cors());
 
 app.use('/api', router);
+
+// Миддлавара для обработки ошибок должна подключаться самой последней
+app.use(errorMiddleware);
 
 const PORT = process.env.PORT || 5000;
 

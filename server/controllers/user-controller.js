@@ -17,7 +17,7 @@ class UserController {
 
       res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
 
-      return res.json(userData);
+      return res.status(200).json(userData);
     } catch (error) {
       next(error);
     }
@@ -31,7 +31,7 @@ class UserController {
 
       res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
 
-      return res.json(userData);
+      return res.status(200).json(userData);
     } catch (error) {
       next(error);
     }
@@ -47,7 +47,7 @@ class UserController {
 
       res.clearCookie('refreshToken');
 
-      return res.json(token);
+      return res.status(200).json(token);
     } catch (error) {
       next(error);
     }
@@ -59,7 +59,7 @@ class UserController {
 
       await userService.activate(activationLink);
 
-      return res.redirect(process.env.CLIENT_URL);
+      return res.status(200).redirect(process.env.CLIENT_URL);
     } catch (error) {
       next(error);
     }
@@ -72,13 +72,14 @@ class UserController {
 
       res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
 
-      return res.json(userData);
+      return res.status(200).json(userData);
     } catch (error) {}
   }
 
   async getUsers(req, res, next) {
     try {
-      res.json({ message: 'Робит' });
+      const users = await userService.getAllUsers();
+      return res.status(200).json(users);
     } catch (error) {
       next(error);
     }

@@ -1,5 +1,10 @@
 import { FC } from 'react';
+import { LoginForm } from './components/LoginForm';
 
 export const App: FC = () => {
-  return <div>Инициализация</div>;
+  return (
+    <div>
+      <LoginForm />
+    </div>
+  );
 };

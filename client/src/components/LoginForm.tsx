@@ -1,9 +1,10 @@
+import { observer } from 'mobx-react-lite';
 import { FC, useContext, useState } from 'react';
 import { ContextStore } from '..';
 
 interface LoginFormProps {}
 
-const LoginForm: FC<LoginFormProps> = () => {
+const LoginForm: FC<LoginFormProps> = observer(() => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const { store } = useContext(ContextStore);
@@ -16,6 +17,6 @@ const LoginForm: FC<LoginFormProps> = () => {
       <button onClick={() => store.registration(email, password)}>Регистрация</button>
     </div>
   );
-};
+});
 
 export { LoginForm };
